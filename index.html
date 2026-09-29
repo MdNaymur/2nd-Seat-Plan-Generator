@@ -241,8 +241,10 @@ button:hover{
     border-radius:15px;
     box-shadow:0 6px 20px rgba(0,0,0,0.15);
     min-height:100vh;
+    max-height:100vh;
     display:flex;
     flex-direction:column;
+    overflow:hidden;
 }
 
 .room-page:last-child{
@@ -254,8 +256,8 @@ button:hover{
     align-items:center;
     justify-content:center;
     gap:20px;
-    margin-bottom:20px;
-    padding-bottom:15px;
+    margin-bottom:15px;
+    padding-bottom:12px;
     border-bottom:3px double #4facfe;
     flex-shrink:0;
     position:relative;
@@ -304,82 +306,167 @@ button:hover{
 
 .room-title{
     text-align:center;
-    margin:15px 0;
+    margin:10px 0;
     flex-shrink:0;
 }
 
 .room-title h2{
     color:#e74c3c;
-    margin-bottom:5px;
-    font-size:24px;
+    margin-bottom:3px;
+    font-size:22px;
 }
 
 .room-title h3{
     color:#2980b9;
-    font-size:20px;
+    font-size:18px;
 }
 
 .room-title .remaining-info{
-    font-size:14px;
+    font-size:13px;
     color:#666;
-    margin-top:5px;
+    margin-top:3px;
 }
 
+/* ============================================
+   GRID - Auto fit to container
+   ============================================ */
 .grid{
     display:grid;
-    gap:5px;
+    gap:3px;
     flex:1;
+    overflow:hidden;
+    /* Grid rows auto-fit based on available space */
+    grid-auto-rows: 1fr;
+}
+
+/* ============================================
+   AUTO SCALING CLASSES
+   Each level reduces font size and min-height
+   ============================================ */
+.grid.scale-large .seat,
+.grid.scale-large .row-header-cell,
+.grid.scale-large .header-cell{
+    min-height:44px;
+    font-size:14px;
+    padding:4px;
+}
+
+.grid.scale-large .header-cell .col-name{
+    font-size:13px;
+}
+.grid.scale-large .header-cell .section-name{
+    font-size:10px;
+}
+
+.grid.scale-medium .seat,
+.grid.scale-medium .row-header-cell,
+.grid.scale-medium .header-cell{
+    min-height:34px;
+    font-size:12px;
+    padding:3px;
+}
+
+.grid.scale-medium .header-cell .col-name{
+    font-size:11px;
+}
+.grid.scale-medium .header-cell .section-name{
+    font-size:9px;
+}
+
+.grid.scale-small .seat,
+.grid.scale-small .row-header-cell,
+.grid.scale-small .header-cell{
+    min-height:26px;
+    font-size:10px;
+    padding:2px;
+}
+
+.grid.scale-small .header-cell .col-name{
+    font-size:10px;
+}
+.grid.scale-small .header-cell .section-name{
+    font-size:8px;
+}
+
+.grid.scale-tiny .seat,
+.grid.scale-tiny .row-header-cell,
+.grid.scale-tiny .header-cell{
+    min-height:20px;
+    font-size:9px;
+    padding:1px;
+}
+
+.grid.scale-tiny .header-cell .col-name{
+    font-size:9px;
+}
+.grid.scale-tiny .header-cell .section-name{
+    font-size:7px;
+}
+
+.grid.scale-micro .seat,
+.grid.scale-micro .row-header-cell,
+.grid.scale-micro .header-cell{
+    min-height:16px;
+    font-size:8px;
+    padding:0px;
+}
+
+.grid.scale-micro .header-cell .col-name{
+    font-size:8px;
+}
+.grid.scale-micro .header-cell .section-name{
+    font-size:6px;
 }
 
 .row-header-cell{
     background:linear-gradient(90deg,#4facfe,#00f2fe);
     color:white;
-    padding:10px;
     text-align:center;
     font-weight:bold;
-    border-radius:6px;
+    border-radius:5px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:14px;
-    min-height:55px;
+    font-size:13px;
+    min-height:50px;
+    padding:5px;
 }
 
 .header-cell{
     background:linear-gradient(90deg,#ff9966,#ff5e62);
     color:white;
-    padding:10px;
     text-align:center;
     font-weight:bold;
-    border-radius:6px;
+    border-radius:5px;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    line-height:1.3;
-    min-height:55px;
+    line-height:1.2;
+    min-height:50px;
+    padding:5px;
 }
 
 .header-cell .col-name{
-    font-size:15px;
+    font-size:14px;
     font-weight:bold;
 }
 
 .header-cell .section-name{
-    font-size:12px;
+    font-size:11px;
     font-weight:bold;
     margin-top:2px;
 }
 
 .seat{
     border:1px solid #ddd;
-    min-height:55px;
+    min-height:50px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:16px;
+    font-size:15px;
     font-weight:bold;
-    border-radius:6px;
+    border-radius:5px;
     background:#f8fbff;
 }
 
@@ -389,7 +476,6 @@ button:hover{
 
 /* ============================================
    ATTENDANCE SHEET STYLES - Portrait A4
-   Font size reduced by 1
    ============================================ */
 .attendance-page{
     page-break-after:always;
@@ -403,7 +489,7 @@ button:hover{
     min-height:100vh;
     display:flex;
     flex-direction:column;
-    font-size:11px;  /* আগে ছিল 12px */
+    font-size:11px;
 }
 
 .attendance-page:last-child{
@@ -437,25 +523,25 @@ button:hover{
 }
 
 .attendance-header .header-text .uni-name{
-    font-size:15px;  /* আগে ছিল 16px */
+    font-size:15px;
     font-weight:bold;
     color:#1a237e;
 }
 
 .attendance-header .header-text .dept-name{
-    font-size:12px;  /* আগে ছিল 13px */
+    font-size:12px;
     font-weight:bold;
     color:#333;
 }
 
 .attendance-header .header-text .exam-name{
-    font-size:11px;  /* আগে ছিল 12px */
+    font-size:11px;
     font-weight:bold;
     color:#555;
 }
 
 .attendance-header .header-text .extra-info{
-    font-size:10px;  /* আগে ছিল 11px */
+    font-size:10px;
     color:#777;
 }
 
@@ -463,7 +549,7 @@ button:hover{
     width:100%;
     border-collapse:collapse;
     margin-bottom:6px;
-    font-size:11px;  /* আগে ছিল 12px */
+    font-size:11px;
     flex-shrink:0;
 }
 
@@ -495,7 +581,7 @@ button:hover{
 .attendance-table{
     width:100%;
     border-collapse:collapse;
-    font-size:11px;  /* আগে ছিল 12px */
+    font-size:11px;
 }
 
 .attendance-table th{
@@ -505,14 +591,14 @@ button:hover{
     text-align:center;
     font-weight:bold;
     border:1px solid #333;
-    font-size:11px;  /* আগে ছিল 12px */
+    font-size:11px;
 }
 
 .attendance-table td{
     padding:4px 4px;
     text-align:center;
     border:1px solid #333;
-    font-size:11px;  /* আগে ছিল 12px */
+    font-size:11px;
     vertical-align:middle;
 }
 
@@ -528,23 +614,23 @@ button:hover{
 .attendance-table .id-cell{
     font-weight:bold;
     color:#1a237e;
-    font-size:11px;  /* আগে ছিল 12px */
+    font-size:11px;
 }
 
 .attendance-table .name-cell{
     text-align:left;
     padding-left:6px;
-    font-size:11px;  /* আগে ছিল 12px */
+    font-size:11px;
 }
 
 .attendance-table .batch-cell{
     width:40px;
-    font-size:11px;  /* আগে ছিল 12px */
+    font-size:11px;
 }
 
 .attendance-table .room-cell{
     width:45px;
-    font-size:11px;  /* আগে ছিল 12px */
+    font-size:11px;
 }
 
 .attendance-table .sign-cell{
@@ -565,7 +651,7 @@ button:hover{
 .attendance-footer-table{
     width:100%;
     border-collapse:collapse;
-    font-size:11px;  /* আগে ছিল 12px */
+    font-size:11px;
     flex-shrink:0;
     border:1px solid #333;
     border-top:1px solid #333;
@@ -576,7 +662,7 @@ button:hover{
     border:1px solid #333;
     text-align:center;
     vertical-align:middle;
-    font-size:11px;  /* আগে ছিল 12px */
+    font-size:11px;
     min-height:40px;
     height:40px;
 }
@@ -592,7 +678,6 @@ button:hover{
     height:40px;
 }
 
-/* Chief Invigilator Signature Section - Bigger */
 .chief-invigilator-section{
     display:flex;
     justify-content:flex-end;
@@ -616,7 +701,7 @@ button:hover{
 }
 
 .chief-invigilator-section .signature-box .label-text{
-    font-size:12px;  /* আগে ছিল 13px */
+    font-size:12px;
     font-weight:bold;
     color:#333;
 }
@@ -633,7 +718,7 @@ button:hover{
 
 .unassigned-section .unassigned-title{
     color:#ff0000;
-    font-size:15px;  /* আগে ছিল 16px */
+    font-size:15px;
     font-weight:bold;
     text-align:center;
     margin-bottom:8px;
@@ -641,7 +726,7 @@ button:hover{
 
 .unassigned-section .unassigned-note{
     color:#ff0000;
-    font-size:13px;  /* আগে ছিল 14px */
+    font-size:13px;
     text-align:center;
     margin-bottom:10px;
     font-style:italic;
@@ -649,7 +734,7 @@ button:hover{
 
 .unassigned-section .student-ids{
     color:#ff0000;
-    font-size:13px;  /* আগে ছিল 14px */
+    font-size:13px;
     text-align:center;
     font-weight:bold;
     word-wrap:break-word;
@@ -660,10 +745,10 @@ button:hover{
 
 .footer-note{
     text-align:center;
-    margin-top:8px;
-    padding-top:6px;
+    margin-top:6px;
+    padding-top:4px;
     border-top:2px solid #4facfe;
-    font-size:11px;  /* আগে ছিল 12px */
+    font-size:11px;
     color:#555;
     flex-shrink:0;
     font-weight:bold;
@@ -698,12 +783,13 @@ button:hover{
         padding:0 !important;
     }
 
+    /* ============ SEAT PLAN PRINT - LANDSCAPE ============ */
     .room-page{
         box-shadow:none !important;
         border:1px solid #000 !important;
         border-radius:0 !important;
         margin:0 !important;
-        padding:8px !important;
+        padding:6px !important;
         background:white !important;
         width:100% !important;
         height:100vh !important;
@@ -720,6 +806,166 @@ button:hover{
         page-break-after:avoid !important;
     }
 
+    .room-header{
+        border-bottom:2px solid #000 !important;
+        margin-bottom:5px !important;
+        padding-bottom:3px !important;
+        flex-shrink:0 !important;
+        gap:10px !important;
+    }
+
+    .room-header .header-text .line1,
+    .room-header .header-text .line2,
+    .room-header .header-text .line3,
+    .room-header .header-text .line4,
+    .room-header .header-text .line5{
+        font-weight:bold !important;
+        color:#000 !important;
+    }
+
+    .room-title{
+        margin:3px 0 !important;
+        flex-shrink:0 !important;
+    }
+
+    .room-title h2{
+        font-size:16px !important;
+        color:#000 !important;
+        margin-bottom:2px !important;
+    }
+
+    .room-title h3{
+        font-size:13px !important;
+        color:#000 !important;
+    }
+
+    .room-title .remaining-info{
+        font-size:9px !important;
+        color:#666 !important;
+    }
+
+    .grid{
+        gap:2px !important;
+        flex:1 !important;
+        overflow:hidden !important;
+        grid-auto-rows: 1fr !important;
+    }
+
+    /* Print auto-scale classes */
+    .grid.scale-large .seat,
+    .grid.scale-large .row-header-cell,
+    .grid.scale-large .header-cell{
+        min-height:0 !important;
+        height:auto !important;
+        font-size:13px !important;
+        padding:3px !important;
+    }
+    .grid.scale-large .header-cell .col-name{ font-size:12px !important; }
+    .grid.scale-large .header-cell .section-name{ font-size:9px !important; }
+
+    .grid.scale-medium .seat,
+    .grid.scale-medium .row-header-cell,
+    .grid.scale-medium .header-cell{
+        min-height:0 !important;
+        height:auto !important;
+        font-size:11px !important;
+        padding:2px !important;
+    }
+    .grid.scale-medium .header-cell .col-name{ font-size:10px !important; }
+    .grid.scale-medium .header-cell .section-name{ font-size:8px !important; }
+
+    .grid.scale-small .seat,
+    .grid.scale-small .row-header-cell,
+    .grid.scale-small .header-cell{
+        min-height:0 !important;
+        height:auto !important;
+        font-size:9px !important;
+        padding:1px !important;
+    }
+    .grid.scale-small .header-cell .col-name{ font-size:9px !important; }
+    .grid.scale-small .header-cell .section-name{ font-size:7px !important; }
+
+    .grid.scale-tiny .seat,
+    .grid.scale-tiny .row-header-cell,
+    .grid.scale-tiny .header-cell{
+        min-height:0 !important;
+        height:auto !important;
+        font-size:8px !important;
+        padding:0px !important;
+    }
+    .grid.scale-tiny .header-cell .col-name{ font-size:8px !important; }
+    .grid.scale-tiny .header-cell .section-name{ font-size:6px !important; }
+
+    .grid.scale-micro .seat,
+    .grid.scale-micro .row-header-cell,
+    .grid.scale-micro .header-cell{
+        min-height:0 !important;
+        height:auto !important;
+        font-size:7px !important;
+        padding:0px !important;
+    }
+    .grid.scale-micro .header-cell .col-name{ font-size:7px !important; }
+    .grid.scale-micro .header-cell .section-name{ font-size:5px !important; }
+
+    .row-header-cell{
+        background:#ddd !important;
+        color:#000 !important;
+        border:1px solid #000 !important;
+        border-radius:0 !important;
+        display:flex !important;
+        align-items:center !important;
+        justify-content:center !important;
+        font-weight:bold !important;
+        min-height:0 !important;
+        height:auto !important;
+    }
+
+    .header-cell{
+        background:#ddd !important;
+        color:#000 !important;
+        border:1px solid #000 !important;
+        border-radius:0 !important;
+        display:flex !important;
+        flex-direction:column !important;
+        align-items:center !important;
+        justify-content:center !important;
+        line-height:1.1 !important;
+        min-height:0 !important;
+        height:auto !important;
+    }
+
+    .seat{
+        background:white !important;
+        border:1px solid #000 !important;
+        border-radius:0 !important;
+        display:flex !important;
+        align-items:center !important;
+        justify-content:center !important;
+        min-height:0 !important;
+        height:auto !important;
+    }
+
+    .unassigned-section{
+        border:2px solid #ff0000 !important;
+        page-break-inside:avoid !important;
+        padding:5px !important;
+        margin-top:5px !important;
+        flex-shrink:0 !important;
+        font-size:9px !important;
+    }
+    .unassigned-section .unassigned-title{ font-size:10px !important; margin-bottom:2px !important; }
+    .unassigned-section .unassigned-note{ font-size:9px !important; margin-bottom:3px !important; }
+    .unassigned-section .student-ids{ font-size:9px !important; padding:2px !important; }
+
+    .footer-note{
+        font-size:9px !important;
+        margin-top:3px !important;
+        padding-top:2px !important;
+        border-top:1px solid #000 !important;
+        flex-shrink:0 !important;
+    }
+
+    /* ============ ATTENDANCE SHEET PRINT - PORTRAIT ============ */
     .attendance-page{
         box-shadow:none !important;
         border:1px solid #000 !important;
@@ -746,17 +992,9 @@ button:hover{
         padding-bottom:5px !important;
     }
 
-    .attendance-header .header-text .uni-name{
-        font-size:13px !important;
-    }
-
-    .attendance-header .header-text .dept-name{
-        font-size:11px !important;
-    }
-
-    .attendance-header .header-text .exam-name{
-        font-size:10px !important;
-    }
+    .attendance-header .header-text .uni-name{ font-size:13px !important; }
+    .attendance-header .header-text .dept-name{ font-size:11px !important; }
+    .attendance-header .header-text .exam-name{ font-size:10px !important; }
 
     .attendance-info-table td{
         padding:2px 4px !important;
@@ -823,11 +1061,6 @@ button:hover{
         margin-top:6px !important;
         padding-top:4px !important;
     }
-
-    @page {
-        size: A4 portrait;
-        margin: 6mm;
-    }
 }
 </style>
 </head>
@@ -843,7 +1076,6 @@ button:hover{
 <div class="header-controls">
     <h4>📝 Page Header Customization</h4>
     
-    <!-- Logo Upload Section -->
     <div style="margin-bottom:15px;">
         <label>🖼️ Upload Logo (Optional)</label>
         <div class="logo-preview">
@@ -865,7 +1097,6 @@ button:hover{
         <div style="font-size:12px;color:#666;margin-top:5px;">Supported: PNG, JPG, JPEG, SVG, GIF | Adjust height from 30-150px</div>
     </div>
     
-    <!-- Line 1 -->
     <label>Line 1 (University Name) - Biggest</label>
     <div class="size-control">
         <input type="text" id="headerLine1" value="Uttara University" placeholder="Line 1" style="flex:1;">
@@ -873,7 +1104,6 @@ button:hover{
         <span>px (Size: <span id="line1SizeDisplay">28</span>px)</span>
     </div>
     
-    <!-- Line 2 -->
     <label>Line 2 (Department Name) - Large</label>
     <div class="size-control">
         <input type="text" id="headerLine2" value="Department of Electrical and Electronic Engineering" placeholder="Line 2" style="flex:1;">
@@ -881,7 +1111,6 @@ button:hover{
         <span>px (Size: <span id="line2SizeDisplay">20</span>px)</span>
     </div>
     
-    <!-- Line 3 -->
     <label>Line 3 (Exam Name) - Medium</label>
     <div class="size-control">
         <input type="text" id="headerLine3" value="Final Term Examination Summer - 2026" placeholder="Line 3" style="flex:1;">
@@ -889,7 +1118,6 @@ button:hover{
         <span>px (Size: <span id="line3SizeDisplay">18</span>px)</span>
     </div>
     
-    <!-- Line 4 -->
     <label>Line 4 (Additional Info) - Small</label>
     <div class="size-control">
         <input type="text" id="headerLine4" value="Attendance Sheet" placeholder="Line 4" style="flex:1;">
@@ -897,7 +1125,6 @@ button:hover{
         <span>px (Size: <span id="line4SizeDisplay">16</span>px)</span>
     </div>
     
-    <!-- Line 5 -->
     <label>Line 5 (Extra Info) - Smallest</label>
     <div class="size-control">
         <input type="text" id="headerLine5" value="সকল পরীক্ষার্থীকে সময়মতো উপস্থিত হতে হবে" placeholder="Line 5" style="flex:1;">
@@ -905,7 +1132,6 @@ button:hover{
         <span>px (Size: <span id="line5SizeDisplay">14</span>px)</span>
     </div>
     
-    <!-- Footer Note -->
     <label>📝 Footer Note (Shows at bottom of each page)</label>
     <div class="size-control">
         <input type="text" id="footerNote" value="প্রশ্নপত্রসহ উপস্থিত থাকতে হবে | সময়মতো হলে প্রবেশ করুন" placeholder="Enter footer note here..." style="flex:1;">
@@ -913,7 +1139,6 @@ button:hover{
         <span>px (Size: <span id="footerSizeDisplay">14</span>px)</span>
     </div>
     
-    <!-- Exam Date & Time -->
     <div style="display:flex;gap:15px;margin-top:10px;">
         <div style="flex:1;">
             <label>📅 Exam Date</label>
@@ -925,7 +1150,6 @@ button:hover{
         </div>
     </div>
     
-    <!-- Day Selection -->
     <div style="margin-top:10px;">
         <label>📆 Exam Day</label>
         <input type="text" id="examDay" value="Saturday" placeholder="e.g., Saturday" style="width:100%;padding:8px;border:2px solid #4facfe;border-radius:8px;">
@@ -977,12 +1201,10 @@ let headerLines = {
     examDay: "Saturday"
 };
 
-// Store parsed data globally
 let globalStudents = [];
 let globalRoomData = [];
 let globalRoomSectionAssignments = {};
 
-// Update display of font sizes
 function updateSizeDisplay(line) {
     const sizeMap = {
         'line1': { input: 'line1FontSize', display: 'line1SizeDisplay' },
@@ -999,16 +1221,12 @@ function updateSizeDisplay(line) {
     }
 }
 
-// Update logo size display
 function updateLogoSizeDisplay() {
     const size = document.getElementById('logoSize').value;
     const previewImg = document.querySelector('#logoPreview img');
-    if (previewImg) {
-        previewImg.style.maxHeight = size + 'px';
-    }
+    if (previewImg) previewImg.style.maxHeight = size + 'px';
 }
 
-// Handle logo upload
 function handleLogoUpload(event) {
     const file = event.target.files[0];
     if (file) {
@@ -1017,7 +1235,6 @@ function handleLogoUpload(event) {
             const logoData = e.target.result;
             headerLines.logo = logoData;
             headerLines.logoSize = parseInt(document.getElementById('logoSize').value) || 60;
-            
             const previewDiv = document.getElementById('logoPreview');
             previewDiv.innerHTML = `<img src="${logoData}" alt="Logo" style="max-height:${headerLines.logoSize}px;max-width:150px;object-fit:contain;">`;
         };
@@ -1025,7 +1242,6 @@ function handleLogoUpload(event) {
     }
 }
 
-// Remove logo
 function removeLogo() {
     headerLines.logo = null;
     const previewDiv = document.getElementById('logoPreview');
@@ -1033,7 +1249,6 @@ function removeLogo() {
     document.getElementById('logoInput').value = '';
 }
 
-// Save header from input fields
 function saveHeader(){
     headerLines.line1 = document.getElementById("headerLine1").value || "Uttara University";
     headerLines.line1Size = parseInt(document.getElementById("line1FontSize").value) || 28;
@@ -1051,7 +1266,6 @@ function saveHeader(){
     headerLines.examDate = document.getElementById("examDate").value || "15/08/2026";
     headerLines.examTime = document.getElementById("examTime").value || "10:00 AM - 01:00 PM";
     headerLines.examDay = document.getElementById("examDay").value || "Saturday";
-    
     alert("✅ Header, Footer & Logo saved successfully!");
 }
 
@@ -1069,31 +1283,15 @@ function readExcel(file){
     });
 }
 
-// ============================================
-// PARSE: Read JSON data with multiple column name support
-// ============================================
 function parseAttendanceData(studentsData) {
     const students = [];
     
-    console.log("Total student records:", studentsData.length);
-    
-    // Show all column names from first row
-    if(studentsData.length > 0) {
-        const firstRow = studentsData[0];
-        const columnNames = Object.keys(firstRow);
-        console.log("📋 Column names found in your Excel:", columnNames);
-        console.log("📋 Sample data from first row:", firstRow);
-    }
-    
-    // Find column value with multiple possible names
     const getColumnValue = (row, possibleNames) => {
         if(!row) return '';
         for(let name of possibleNames) {
-            // Check exact match
             if(row[name] !== undefined && row[name] !== null && row[name] !== '') {
                 return String(row[name]).trim();
             }
-            // Check case insensitive
             const keys = Object.keys(row);
             for(let key of keys) {
                 if(key.toLowerCase() === name.toLowerCase()) {
@@ -1121,9 +1319,7 @@ function parseAttendanceData(studentsData) {
         const program = getColumnValue(row, ['Program', 'Programme']);
         const credits = getColumnValue(row, ['Credits', 'Credit']);
         
-        if(!studentId || !section) {
-            return;
-        }
+        if(!studentId || !section) return;
         
         students.push({
             Batch: batch,
@@ -1139,26 +1335,61 @@ function parseAttendanceData(studentsData) {
         });
     });
     
-    console.log(`✅ Total students parsed: ${students.length}`);
-    
-    // Show unique course codes found
-    let courseCodes = new Set();
-    students.forEach(s => {
-        if(s.CourseCode && s.CourseCode !== 'N/A') {
-            courseCodes.add(s.CourseCode);
-        }
-    });
-    console.log("📚 Course Codes found:", Array.from(courseCodes));
-    
-    let sectionCounts = {};
-    students.forEach(s => {
-        const key = s.Section;
-        if(!sectionCounts[key]) sectionCounts[key] = 0;
-        sectionCounts[key]++;
-    });
-    console.log("📊 Section counts:", sectionCounts);
-    
     return students;
+}
+
+// ============================================
+// AUTO SCALE FUNCTION - Determines scale based on rows
+// ============================================
+function getScaleClass(maxRows) {
+    if(maxRows <= 12) return 'scale-large';
+    if(maxRows <= 18) return 'scale-medium';
+    if(maxRows <= 25) return 'scale-small';
+    if(maxRows <= 33) return 'scale-tiny';
+    return 'scale-micro';
+}
+
+// ============================================
+// CALCULATE OPTIMAL SCALE BASED ON ROWS & COLUMNS
+// This is the KEY function to fit everything on one page
+// ============================================
+function calculateOptimalScale(maxRows, totalCols) {
+    // Landscape A4: approx 190mm height available for grid
+    // After header (~70px) and footer (~30px), roughly 190mm - 100px = ~620px available
+    
+    // Estimate: each row needs certain height
+    // Header row needs ~35px, data rows need min ~22px each
+    
+    // Total estimated height = header(35) + (maxRows * rowHeight)
+    // If exceeds available, reduce scale
+    
+    // Adjust based on total columns (more columns = less width per column, but doesn't affect height)
+    
+    // Base scale calculation
+    let scale;
+    
+    if(maxRows <= 12) {
+        scale = 'scale-large';
+    } else if(maxRows <= 18) {
+        scale = 'scale-medium';
+    } else if(maxRows <= 25) {
+        scale = 'scale-small';
+    } else if(maxRows <= 33) {
+        scale = 'scale-tiny';
+    } else {
+        scale = 'scale-micro';
+    }
+    
+    // If too many columns AND many rows, one more step down
+    if(totalCols >= 6 && maxRows > 15) {
+        const scales = ['scale-large', 'scale-medium', 'scale-small', 'scale-tiny', 'scale-micro'];
+        const currentIdx = scales.indexOf(scale);
+        if(currentIdx < scales.length - 1) {
+            scale = scales[currentIdx + 1];
+        }
+    }
+    
+    return scale;
 }
 
 // ============================================
@@ -1178,14 +1409,11 @@ async function generatePlan(){
         const studentsData = await readExcel(af);
         const roomsData = await readExcel(rf);
         
-        console.log("Sample student data:", studentsData[0]);
-        console.log("Sample room data:", roomsData[0]);
-        
         const students = parseAttendanceData(studentsData);
         globalStudents = students;
         
         if(students.length === 0) {
-            alert("❌ No students found in the attendance file.\n\nPlease check console (F12) for column names.");
+            alert("❌ No students found in the attendance file.");
             return;
         }
         
@@ -1201,7 +1429,6 @@ async function generatePlan(){
             return;
         }
 
-        // Create student queues with Course Code
         let allStudents = [];
         students.forEach(r => {
             allStudents.push({
@@ -1213,7 +1440,6 @@ async function generatePlan(){
             });
         });
 
-        // Create section queues with Course Code
         let sectionQueues = {};
         let studentDetails = {};
         allStudents.forEach(student => {
@@ -1229,7 +1455,6 @@ async function generatePlan(){
             });
         });
 
-        // Get unique groups
         let uniqueGroups = [];
         let seenGroups = new Set();
         allStudents.forEach(student => {
@@ -1240,9 +1465,6 @@ async function generatePlan(){
             }
         });
 
-        console.log("Unique groups:", uniqueGroups);
-
-        // Create pairs
         let pairs = [];
         for(let i = 0; i < uniqueGroups.length; i += 2){
             const groupA = uniqueGroups[i];
@@ -1253,7 +1475,6 @@ async function generatePlan(){
         let html = "";
         let globalRoomIndex = 0;
         
-        // Store room assignments for attendance - Room + Section wise
         globalRoomSectionAssignments = {};
 
         for(let pairIndex = 0; pairIndex < pairs.length; pairIndex++){
@@ -1363,6 +1584,8 @@ async function generatePlan(){
                 }
                 
                 const maxRows = Math.max(...seatCounts);
+                // Calculate optimal scale based on rows AND columns
+                const scaleClass = calculateOptimalScale(maxRows, totalCols);
                 
                 let logoHtml = '';
                 if (headerLines.logo) {
@@ -1375,10 +1598,7 @@ async function generatePlan(){
                     return `Batch ${parts[0]} Sec ${parts[1]} (${parts[2]})`;
                 }
                 
-                // Store for attendance - collect students for this room
                 let roomStudentMap = {};
-                
-                // First, assign students to seats and collect for attendance
                 let seatMatrix = [];
                 for(let r=0; r<maxRows; r++){
                     let rowSeats = [];
@@ -1393,7 +1613,6 @@ async function generatePlan(){
                         
                         if(sectionQueues[groupKey] && sectionQueues[groupKey].length > 0){
                             id = sectionQueues[groupKey].shift();
-                            // Store for attendance
                             const parts = groupKey.split('-');
                             const sec = parts[1] || 'Unknown';
                             const batch = parts[0] || '50';
@@ -1421,14 +1640,12 @@ async function generatePlan(){
                     seatMatrix.push(rowSeats);
                 }
                 
-                // Add to global assignments
                 Object.keys(roomStudentMap).forEach(key => {
                     const data = roomStudentMap[key];
                     if(data.students.length > 0) {
                         if(!globalRoomSectionAssignments[key]) {
                             globalRoomSectionAssignments[key] = data;
                         } else {
-                            // Merge students
                             globalRoomSectionAssignments[key].students = 
                                 globalRoomSectionAssignments[key].students.concat(data.students);
                         }
@@ -1454,7 +1671,7 @@ async function generatePlan(){
                             Remaining: ${formatGroupName(groupA)}(${remainingA}) ${groupB ? "| "+formatGroupName(groupB)+"("+remainingB+")" : ""} | Total Seats: ${totalSeats}
                         </div>
                     </div>
-                    <div class="grid" style="grid-template-columns:50px repeat(${totalCols},1fr);">
+                    <div class="grid ${scaleClass}" style="grid-template-columns:50px repeat(${totalCols},1fr); grid-template-rows: auto repeat(${maxRows}, 1fr);">
                 `;
                 
                 html += `<div class="row-header-cell">Row</div>`;
@@ -1517,8 +1734,6 @@ async function generatePlan(){
         
         document.getElementById("output").innerHTML = html;
         
-        console.log("Room-Section Assignments:", globalRoomSectionAssignments);
-        
         if(html === "") {
             alert("⚠️ No seat plan generated. Please check your data.");
         } else {
@@ -1532,7 +1747,7 @@ async function generatePlan(){
 }
 
 // ============================================
-// GENERATE ATTENDANCE SHEETS - Room + Section wise
+// GENERATE ATTENDANCE SHEETS
 // ============================================
 function generateAttendance() {
     const output = document.getElementById('output');
@@ -1543,7 +1758,6 @@ function generateAttendance() {
     }
     
     try {
-        // Get section info from globalStudents
         let sectionInfoMap = {};
         globalStudents.forEach(r => {
             const key = r.Section;
@@ -1564,7 +1778,6 @@ function generateAttendance() {
         let html = "";
         let totalSheets = 0;
         
-        // Process each room+section assignment
         const assignmentKeys = Object.keys(globalRoomSectionAssignments);
         
         if(assignmentKeys.length === 0) {
@@ -1582,7 +1795,6 @@ function generateAttendance() {
             
             if(students.length === 0) return;
             
-            // Find full info
             const info = sectionInfoMap[section] || {};
             
             let logoHtml = '';
@@ -1592,7 +1804,6 @@ function generateAttendance() {
             
             html += `
             <div class="attendance-page">
-                <!-- Header -->
                 <div class="attendance-header">
                     ${logoHtml}
                     <div class="header-text">
@@ -1603,7 +1814,6 @@ function generateAttendance() {
                     </div>
                 </div>
                 
-                <!-- Info Table - 5 rows -->
                 <table class="attendance-info-table">
                     <tr>
                         <td class="label-cell">Faculty ID</td>
@@ -1637,7 +1847,6 @@ function generateAttendance() {
                     </tr>
                 </table>
                 
-                <!-- Main Table -->
                 <div class="attendance-table-wrap">
                     <table class="attendance-table">
                         <thead>
@@ -1675,7 +1884,6 @@ function generateAttendance() {
                     </table>
                 </div>
                 
-                <!-- Footer Invigilator Section - 2 rows attached to main table -->
                 <table class="attendance-footer-table">
                     <tr>
                         <td class="footer-label" style="width:16%;">Room No</td>
@@ -1693,7 +1901,6 @@ function generateAttendance() {
                     </tr>
                 </table>
                 
-                <!-- Chief Invigilator Signature -->
                 <div class="chief-invigilator-section">
                     <div class="signature-box">
                         <div class="label-text">Chief Invigilator</div>
@@ -1701,7 +1908,6 @@ function generateAttendance() {
                     </div>
                 </div>
                 
-                <!-- Footer -->
                 <div class="footer-note" style="font-size:${headerLines.footerSize}px;">${headerLines.footer}</div>
             </div>
             `;
@@ -1728,7 +1934,6 @@ function generateSummaryExcel() {
     }
     
     try {
-        // Get summary data from globalRoomSectionAssignments
         const assignmentKeys = Object.keys(globalRoomSectionAssignments);
         
         if(assignmentKeys.length === 0) {
@@ -1736,13 +1941,10 @@ function generateSummaryExcel() {
             return;
         }
         
-        // Group by Batch + Section + Course Code
         let groupedData = {};
         
         assignmentKeys.forEach((key) => {
             const data = globalRoomSectionAssignments[key];
-            
-            // Extract course code from the key (format: Room-Section-Batch-CourseCode)
             const keyParts = key.split('-');
             const courseCode = keyParts[keyParts.length - 1] || 'N/A';
             const batch = keyParts[keyParts.length - 2] || 'N/A';
@@ -1750,7 +1952,6 @@ function generateSummaryExcel() {
             const roomNo = keyParts[0] || 'N/A';
             
             const noOfStudents = data.students ? data.students.length : 0;
-            
             const groupKey = batch + "-" + section + "-" + courseCode;
             
             if(!groupedData[groupKey]) {
@@ -1767,12 +1968,10 @@ function generateSummaryExcel() {
             groupedData[groupKey].studentCounts.push(noOfStudents);
         });
         
-        // Prepare summary data with dynamic columns
         let summaryData = [];
         let sl = 1;
         let maxRooms = 0;
         
-        // First pass to find max rooms
         Object.keys(groupedData).forEach((key) => {
             const data = groupedData[key];
             if(data.rooms.length > maxRooms) {
@@ -1780,22 +1979,17 @@ function generateSummaryExcel() {
             }
         });
         
-        // Get exam date, day, time from headerLines
         const examDate = headerLines.examDate || 'N/A';
         const examDay = headerLines.examDay || 'N/A';
         const examTime = headerLines.examTime || 'N/A';
         
-        // Second pass to create data rows
         Object.keys(groupedData).forEach((key) => {
             const data = groupedData[key];
             const batch = data.batch || 'N/A';
             const section = data.section || 'N/A';
             const courseCode = data.courseCode || 'N/A';
-            
-            // Combine Batch and Section: "50 Day A"
             const batchSection = batch + " Day " + section;
             
-            // Create row with dynamic room columns
             let row = {
                 'SL': sl,
                 'Date': examDate,
@@ -1805,7 +1999,6 @@ function generateSummaryExcel() {
                 'Course Code': courseCode
             };
             
-            // Add Room 1, Room 2, Room 3... columns
             for(let i = 0; i < maxRooms; i++) {
                 const roomNum = i + 1;
                 if(i < data.rooms.length) {
@@ -1815,7 +2008,6 @@ function generateSummaryExcel() {
                 }
             }
             
-            // Add No of Student R1, R2, R3... columns
             for(let i = 0; i < maxRooms; i++) {
                 const roomNum = i + 1;
                 if(i < data.studentCounts.length) {
@@ -1825,59 +2017,37 @@ function generateSummaryExcel() {
                 }
             }
             
-            // Add Remarks
             row['Remarks'] = '';
-            
             summaryData.push(row);
             sl++;
         });
         
-        // Sort by Batch & Section
         summaryData.sort((a, b) => {
             return a['Batch & Section'].localeCompare(b['Batch & Section']);
         });
         
-        // Update SL after sorting
         summaryData.forEach((item, index) => {
             item.SL = index + 1;
         });
         
-        // Create workbook
         const wb = XLSX.utils.book_new();
         const ws = XLSX.utils.json_to_sheet(summaryData);
         
-        // Set column widths
         let colWidths = [
-            { wch: 5 },   // SL
-            { wch: 14 },  // Date
-            { wch: 12 },  // Day
-            { wch: 18 },  // Time
-            { wch: 18 },  // Batch & Section
-            { wch: 18 }   // Course Code
+            { wch: 5 }, { wch: 14 }, { wch: 12 }, { wch: 18 }, { wch: 18 }, { wch: 18 }
         ];
         
-        // Add widths for Room columns
-        for(let i = 0; i < maxRooms; i++) {
-            colWidths.push({ wch: 12 }); // Room 1, Room 2, ...
-        }
-        
-        // Add widths for No of Student columns
-        for(let i = 0; i < maxRooms; i++) {
-            colWidths.push({ wch: 18 }); // No of Student R1, R2, ...
-        }
-        
-        colWidths.push({ wch: 20 }); // Remarks
+        for(let i = 0; i < maxRooms; i++) colWidths.push({ wch: 12 });
+        for(let i = 0; i < maxRooms; i++) colWidths.push({ wch: 18 });
+        colWidths.push({ wch: 20 });
         
         ws['!cols'] = colWidths;
-        
         XLSX.utils.book_append_sheet(wb, ws, "Summary");
         
-        // Generate Excel file
         const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
         const blob = new Blob([wbout], { type: 'application/octet-stream' });
         const url = URL.createObjectURL(blob);
         
-        // Download file
         const link = document.createElement('a');
         link.href = url;
         link.download = `Seat_Plan_Summary_${new Date().toISOString().slice(0,10)}.xlsx`;
@@ -1895,7 +2065,7 @@ function generateSummaryExcel() {
 }
 
 // ============================================
-// PRINT FUNCTION
+// PRINT FUNCTION - Dynamic orientation
 // ============================================
 function printPlan() {
     const output = document.getElementById('output');
@@ -1904,8 +2074,32 @@ function printPlan() {
         return;
     }
     
+    const hasSeatPlan = output.querySelector('.room-page') !== null;
+    const hasAttendance = output.querySelector('.attendance-page') !== null;
+    
+    let printMode = 'seatplan';
+    if(hasAttendance && !hasSeatPlan) {
+        printMode = 'attendance';
+    } else if(hasAttendance && hasSeatPlan) {
+        const choice = confirm("Both Seat Plan and Attendance Sheets are present.\n\nOK = Print Seat Plan (Landscape)\nCancel = Print Attendance Sheets (Portrait)");
+        printMode = choice ? 'seatplan' : 'attendance';
+    }
+    
     document.querySelector('h1').style.display = 'none';
     document.querySelector('.controls').style.display = 'none';
+    
+    let dynamicStyle = document.getElementById('dynamic-print-style');
+    if(dynamicStyle) dynamicStyle.remove();
+    
+    dynamicStyle = document.createElement('style');
+    dynamicStyle.id = 'dynamic-print-style';
+    
+    if(printMode === 'seatplan') {
+        dynamicStyle.innerHTML = `@media print { @page { size: A4 landscape; margin: 6mm; } }`;
+    } else {
+        dynamicStyle.innerHTML = `@media print { @page { size: A4 portrait; margin: 6mm; } }`;
+    }
+    document.head.appendChild(dynamicStyle);
     
     setTimeout(function() {
         window.print();
@@ -1913,6 +2107,8 @@ function printPlan() {
         setTimeout(function() {
             document.querySelector('h1').style.display = 'block';
             document.querySelector('.controls').style.display = 'block';
+            const ds = document.getElementById('dynamic-print-style');
+            if(ds) ds.remove();
         }, 500);
     }, 100);
 }
