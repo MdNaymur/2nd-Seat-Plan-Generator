@@ -327,22 +327,14 @@ button:hover{
     margin-top:3px;
 }
 
-/* ============================================
-   GRID - Auto fit to container
-   ============================================ */
 .grid{
     display:grid;
     gap:3px;
     flex:1;
     overflow:hidden;
-    /* Grid rows auto-fit based on available space */
     grid-auto-rows: 1fr;
 }
 
-/* ============================================
-   AUTO SCALING CLASSES
-   Each level reduces font size and min-height
-   ============================================ */
 .grid.scale-large .seat,
 .grid.scale-large .row-header-cell,
 .grid.scale-large .header-cell{
@@ -351,12 +343,8 @@ button:hover{
     padding:4px;
 }
 
-.grid.scale-large .header-cell .col-name{
-    font-size:13px;
-}
-.grid.scale-large .header-cell .section-name{
-    font-size:10px;
-}
+.grid.scale-large .header-cell .col-name{ font-size:13px; }
+.grid.scale-large .header-cell .section-name{ font-size:10px; }
 
 .grid.scale-medium .seat,
 .grid.scale-medium .row-header-cell,
@@ -366,12 +354,8 @@ button:hover{
     padding:3px;
 }
 
-.grid.scale-medium .header-cell .col-name{
-    font-size:11px;
-}
-.grid.scale-medium .header-cell .section-name{
-    font-size:9px;
-}
+.grid.scale-medium .header-cell .col-name{ font-size:11px; }
+.grid.scale-medium .header-cell .section-name{ font-size:9px; }
 
 .grid.scale-small .seat,
 .grid.scale-small .row-header-cell,
@@ -381,12 +365,8 @@ button:hover{
     padding:2px;
 }
 
-.grid.scale-small .header-cell .col-name{
-    font-size:10px;
-}
-.grid.scale-small .header-cell .section-name{
-    font-size:8px;
-}
+.grid.scale-small .header-cell .col-name{ font-size:10px; }
+.grid.scale-small .header-cell .section-name{ font-size:8px; }
 
 .grid.scale-tiny .seat,
 .grid.scale-tiny .row-header-cell,
@@ -396,12 +376,8 @@ button:hover{
     padding:1px;
 }
 
-.grid.scale-tiny .header-cell .col-name{
-    font-size:9px;
-}
-.grid.scale-tiny .header-cell .section-name{
-    font-size:7px;
-}
+.grid.scale-tiny .header-cell .col-name{ font-size:9px; }
+.grid.scale-tiny .header-cell .section-name{ font-size:7px; }
 
 .grid.scale-micro .seat,
 .grid.scale-micro .row-header-cell,
@@ -411,12 +387,8 @@ button:hover{
     padding:0px;
 }
 
-.grid.scale-micro .header-cell .col-name{
-    font-size:8px;
-}
-.grid.scale-micro .header-cell .section-name{
-    font-size:6px;
-}
+.grid.scale-micro .header-cell .col-name{ font-size:8px; }
+.grid.scale-micro .header-cell .section-name{ font-size:6px; }
 
 .row-header-cell{
     background:linear-gradient(90deg,#4facfe,#00f2fe);
@@ -783,7 +755,6 @@ button:hover{
         padding:0 !important;
     }
 
-    /* ============ SEAT PLAN PRINT - LANDSCAPE ============ */
     .room-page{
         box-shadow:none !important;
         border:1px solid #000 !important;
@@ -851,7 +822,6 @@ button:hover{
         grid-auto-rows: 1fr !important;
     }
 
-    /* Print auto-scale classes */
     .grid.scale-large .seat,
     .grid.scale-large .row-header-cell,
     .grid.scale-large .header-cell{
@@ -965,7 +935,6 @@ button:hover{
         flex-shrink:0 !important;
     }
 
-    /* ============ ATTENDANCE SHEET PRINT - PORTRAIT ============ */
     .attendance-page{
         box-shadow:none !important;
         border:1px solid #000 !important;
@@ -1338,34 +1307,7 @@ function parseAttendanceData(studentsData) {
     return students;
 }
 
-// ============================================
-// AUTO SCALE FUNCTION - Determines scale based on rows
-// ============================================
-function getScaleClass(maxRows) {
-    if(maxRows <= 12) return 'scale-large';
-    if(maxRows <= 18) return 'scale-medium';
-    if(maxRows <= 25) return 'scale-small';
-    if(maxRows <= 33) return 'scale-tiny';
-    return 'scale-micro';
-}
-
-// ============================================
-// CALCULATE OPTIMAL SCALE BASED ON ROWS & COLUMNS
-// This is the KEY function to fit everything on one page
-// ============================================
 function calculateOptimalScale(maxRows, totalCols) {
-    // Landscape A4: approx 190mm height available for grid
-    // After header (~70px) and footer (~30px), roughly 190mm - 100px = ~620px available
-    
-    // Estimate: each row needs certain height
-    // Header row needs ~35px, data rows need min ~22px each
-    
-    // Total estimated height = header(35) + (maxRows * rowHeight)
-    // If exceeds available, reduce scale
-    
-    // Adjust based on total columns (more columns = less width per column, but doesn't affect height)
-    
-    // Base scale calculation
     let scale;
     
     if(maxRows <= 12) {
@@ -1380,7 +1322,6 @@ function calculateOptimalScale(maxRows, totalCols) {
         scale = 'scale-micro';
     }
     
-    // If too many columns AND many rows, one more step down
     if(totalCols >= 6 && maxRows > 15) {
         const scales = ['scale-large', 'scale-medium', 'scale-small', 'scale-tiny', 'scale-micro'];
         const currentIdx = scales.indexOf(scale);
@@ -1584,7 +1525,6 @@ async function generatePlan(){
                 }
                 
                 const maxRows = Math.max(...seatCounts);
-                // Calculate optimal scale based on rows AND columns
                 const scaleClass = calculateOptimalScale(maxRows, totalCols);
                 
                 let logoHtml = '';
@@ -1747,7 +1687,7 @@ async function generatePlan(){
 }
 
 // ============================================
-// GENERATE ATTENDANCE SHEETS
+// GENERATE ATTENDANCE SHEETS - FIXED: Using Batch+Section+CourseCode for accurate info
 // ============================================
 function generateAttendance() {
     const output = document.getElementById('output');
@@ -1758,14 +1698,24 @@ function generateAttendance() {
     }
     
     try {
+        // ============================================
+        // FIX: Create section info map with FULL KEY (Batch-Section-CourseCode)
+        // This ensures accurate matching of Faculty, Course Title, etc.
+        // ============================================
         let sectionInfoMap = {};
         globalStudents.forEach(r => {
-            const key = r.Section;
-            if(!sectionInfoMap[key]) {
-                sectionInfoMap[key] = {
-                    section: r.Section,
-                    batch: r.Batch,
-                    courseCode: r.CourseCode || 'N/A',
+            const batchKey = String(r.Batch).trim();
+            const sectionKey = String(r.Section).trim().toUpperCase();
+            const courseKey = String(r.CourseCode || 'N/A').trim();
+            
+            // Full unique key: Batch-Section-CourseCode
+            const fullKey = batchKey + "-" + sectionKey + "-" + courseKey;
+            
+            if(!sectionInfoMap[fullKey]) {
+                sectionInfoMap[fullKey] = {
+                    section: sectionKey,
+                    batch: batchKey,
+                    courseCode: courseKey,
                     courseTitle: r.CourseTitle || 'N/A',
                     facultyId: r.FacultyID || 'N/A',
                     facultyName: r.FacultyName || 'N/A',
@@ -1774,6 +1724,8 @@ function generateAttendance() {
                 };
             }
         });
+        
+        console.log("📋 Section Info Map Keys:", Object.keys(sectionInfoMap));
         
         let html = "";
         let totalSheets = 0;
@@ -1795,7 +1747,13 @@ function generateAttendance() {
             
             if(students.length === 0) return;
             
-            const info = sectionInfoMap[section] || {};
+            // ============================================
+            // FIX: Use full key to find correct info
+            // ============================================
+            const fullKey = batch + "-" + section + "-" + courseCode;
+            const info = sectionInfoMap[fullKey] || {};
+            
+            console.log("🔍 Attendance Sheet for:", fullKey, "Found info:", info);
             
             let logoHtml = '';
             if (headerLines.logo) {
@@ -2065,7 +2023,7 @@ function generateSummaryExcel() {
 }
 
 // ============================================
-// PRINT FUNCTION - Dynamic orientation
+// PRINT FUNCTION
 // ============================================
 function printPlan() {
     const output = document.getElementById('output');
